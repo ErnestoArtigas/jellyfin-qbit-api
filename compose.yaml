@@ -1,0 +1,19 @@
+services:
+  jellyfin-qbit-api:
+    container_name: jellyfin-qbit-api
+    build:
+      context: .
+      target: prod-stage
+    env_file:
+      - ./.env
+    environment:
+      FORCE_COLOR: 1
+    ports:
+      - 8000:8000
+    networks:
+      - proxiable
+
+networks:
+  proxiable:
+    name: proxiable
+    external: true
