@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status
 
-from utils import qbit_client
+from utils.qbit_client import qbit_client
 
 from . import service
 from .model import User
