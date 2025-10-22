@@ -1,6 +1,7 @@
 services:
   jellyfin-qbit-api:
     container_name: jellyfin-qbit-api
+    restart: unless-stopped
     build:
       context: .
       target: prod-stage
@@ -12,10 +13,8 @@ services:
       - 8000:8000
     volumes:
       - ./database.db:/app/database.db
-
     networks:
       - proxiable
-
 networks:
   proxiable:
     name: proxiable
