@@ -13,9 +13,3 @@ services:
       - 8000:8000
     volumes:
       - ./database.db:/app/database.db
-    networks:
-      - proxiable
-networks:
-  proxiable:
-    name: proxiable
-    external: true
