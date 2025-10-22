@@ -7,6 +7,7 @@ from utils.qbit_client import qbit_client
 from users.router import router as users_router
 from playback_sessions.router import router as playback_sessions_router
 from torrents.router import router as torrents_router
+from jellyfin.router import router as jellyfin_router
 
 
 app = FastAPI()
@@ -19,3 +20,4 @@ app.include_router(
     playback_sessions_router, prefix="/playback_sessions", tags=["playback_sessions"]
 )
 app.include_router(torrents_router, prefix="/torrents", tags=["torrents"])
+app.include_router(jellyfin_router, prefix="/jellyfin", tags=["jellyfin"])
