@@ -8,6 +8,8 @@ from . import repository
 from users import service as users_service
 from users.model import User
 
+from torrents import service as torrents_service
+
 
 def get_playback_sessions() -> list[PlaybackSession]:
     return repository.get_playback_sessions()
@@ -34,6 +36,10 @@ def add_playback_session(playback_session: PlaybackSession) -> PlaybackSession:
     )
     if existing_playback_session:
         return existing_playback_session
+
+    if len(get_playback_sessions()) == 0:
+        torrents_service.stop_torrents()
+
     return repository.add_playback_session(playback_session)
 
 
@@ -58,4 +64,8 @@ def create_playback_session(
 
 def delete_playback_session(id: str) -> None:
     playback_session = get_playback_session_by_id(id)
-    return repository.delete_playback_session(playback_session)
+
+    repository.delete_playback_session(playback_session)
+
+    if len(get_playback_sessions()) == 0:
+        torrents_service.start_torrents()
